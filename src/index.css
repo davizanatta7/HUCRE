@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Saint';
+  src: url('./Saint-4ZJ4.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+  @font-face {
+  font-family: 'All-Star';
+  src: url('./All-Star.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@theme {
+  --font-saint: 'Saint', sans-serif;
+  --font-all-star: 'All-Star', sans-serif;
+  --color-background: #f3f4f6;
+  --color-foreground: #ff0000;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
