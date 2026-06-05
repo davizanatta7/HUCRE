@@ -40,7 +40,7 @@ export function App() {
 
       <footer className="bg-black border-t border-red-700 mt-auto">
         <div className="max-w-7xl mx-auto px-4 py-6 text-center text-white text-sm">
-          © 2026 Storefront. Projeto Educacional.
+          © 2026 HUCRE STUDIO. Todos os direitos reservados.
         </div>
       </footer>
     </div>
