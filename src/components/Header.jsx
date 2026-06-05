@@ -12,7 +12,7 @@ export function Header({ totalItems }) {
   {/*ABAS COM MENU NA LATERAL (SIDEBAR)*/}
   return (
       <>
-      <header className="bg-gray-950 shadow-sm sticky top-0 z-50 border-b border-zinc-900">
+      <header className="bg-black shadow-sm sticky top-0 z-50 border-b border-zinc-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           
           {/* BOTÃO DO MENU LATERAL (Hambúrguer) */}
@@ -64,7 +64,7 @@ export function Header({ totalItems }) {
         >
           {/* Caixa da Barra Lateral (Desliza da esquerda) */}
           <div 
-            className="w-72 max-w-[80vw] h-full bg-gray-950 border-r border-zinc-900 p-6 flex flex-col justify-between"
+            className="w-72 max-w-[80vw] h-full bg-black border-r border-zinc-900 p-6 flex flex-col justify-between"
             onClick={(e) => e.stopPropagation()} // Impede que clique dentro do menu feche ele
           >
             <div>
@@ -87,14 +87,14 @@ export function Header({ totalItems }) {
                   to="/" 
                   onClick={() => { setActiveTab('catalogo'); setIsMenuOpen(false); }}
                   className={`
-                    text-base tracking-widest uppercase py-3 px-4 flex items-center relative font-mono transition-all
+                    text-base tracking-widest uppercase py-3 px-4 flex items-center relative font-saint transition-all
                     /* Efeito visual: se estiver ativa ganha fundo cinza escuro e borda vermelha na esquerda */
                     ${activeTab === 'catalogo' 
                       ? 'text-white font-bold bg-zinc-900 border-l-4 border-red-700' 
                       : 'text-gray-400 hover:text-red-700 hover:bg-zinc-900/50'}
                   `}
                 >
-                  Catálogo
+                  Catalogo
                 </Link>
 
                 {/* ABA: Novidades */}
@@ -102,7 +102,7 @@ export function Header({ totalItems }) {
                   to="/novidades" 
                   onClick={() => { setActiveTab('novidades'); setIsMenuOpen(false); }}
                   className={`
-                    text-base tracking-widest uppercase py-3 px-4 flex items-center relative font-mono transition-all
+                    text-base tracking-widest uppercase py-3 px-4 flex items-center relative font-saint transition-all
                     ${activeTab === 'novidades' 
                       ? 'text-white font-bold bg-zinc-900 border-l-4 border-red-700' 
                       : 'text-gray-400 hover:text-red-700 hover:bg-zinc-900/50'}
@@ -116,13 +116,13 @@ export function Header({ totalItems }) {
                   to="/contacto" 
                   onClick={() => { setActiveTab('contacto'); setIsMenuOpen(false); }}
                   className={`
-                    text-base tracking-widest uppercase py-3 px-4 flex items-center relative font-mono transition-all
+                    text-base tracking-widest uppercase py-3 px-4 flex items-center relative font-saint transition-all
                     ${activeTab === 'contacto' 
                       ? 'text-white font-bold bg-zinc-900 border-l-4 border-red-700' 
                       : 'text-gray-400 hover:text-red-700 hover:bg-zinc-900/50'}
                   `}
                 >
-                  Contacto
+                  Contato
                 </Link>
 
               </nav>
