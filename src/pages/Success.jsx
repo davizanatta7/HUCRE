@@ -37,8 +37,8 @@ export function Success() {
 
       <Link
         to="/"
-        className="bg-indigo-600 text-white px-8 py-4 rounded-xl font-bold
-        text-lg hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-200"
+        className="bg-red-900 text-white px-8 py-4 rounded-xl font-saint
+        text-lg hover:bg-red-700 transition-colors shadow-lg shadow-red-200"
       >Continuar Comprando</Link>
     </div>
   );
