@@ -14,9 +14,9 @@ export function Checkout() {
   if (cart.length === 0) {
     return (
       <div className="text-center py-20">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Seu carrinho está vazio.</h2>
-        <p className="text-gray-500 mb-8">Explore nosso catálogo e adicione produtos.</p>
-        <Link to="/" className="bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+        <h2 className="text-2xl font-['Saint'] text-gray-100 mb-4">Seu carrinho esta vazio.</h2>
+        <p className="font-saint text-gray-500 mb-8">Explore nosso catálogo e adicione produtos.</p>
+        <Link to="/" className="bg-red-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors">
           Ver produtos
         </Link>
       </div>

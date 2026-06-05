@@ -3,10 +3,17 @@ import { useParams, Link, useOutletContext } from 'react-router-dom'
 
 export function ProductDetails() {
   const { id } = useParams()
-  const { addToCart } = useOutletContext();
-
+  const { addToCart: addToCartGlobal } = useOutletContext();
+  
+  const [showToast, setShowToast] = useState(false)
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
+
+   const  addToCart = (product) => {
+    addToCartGlobal(product)
+    setShowToast(true)
+    setTimeout(() => setShowToast(false), 3000)
+  }
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -93,6 +100,11 @@ export function ProductDetails() {
               >
                 Adicionar ao Carrinho
               </button>
+              {showToast && (
+                <div className="fixed bottom-5 right-5 bg-white text-black px-4 py-3 border-l-4 border-red-600 shadow-lg z-50">
+                  Adicionado ao carrinho!
+                </div>
+              )}
             </div>
           </div>
         </div>
