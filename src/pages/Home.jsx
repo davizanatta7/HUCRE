@@ -24,7 +24,7 @@ export function Home() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="text-lg font-medium text-gray-100 animate-pulse">Carregando catálogo de produtos...</div>
+        <div className="text-lg font-all-star text-gray-100 animate-pulse">Carregando catálogo de produtos...</div>
       </div>
     )
   }
