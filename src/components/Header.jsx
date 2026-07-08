@@ -9,7 +9,7 @@ export function Header({ totalItems }) {
   {/*1. Estado para controlar se o menu lateral está aberto ou fechado*/}
   const [isMenuOpen, setIsMenuOpen] = useState(false);
    
-  {/*ABAS COM MENU NA LATERAL (SIDEBAR)*/}
+  {/*(SIDEBAR)*/}
   return (
       <>
       <header className="bg-black shadow-sm sticky top-0 z-50 border-b border-zinc-900">
@@ -24,14 +24,42 @@ export function Header({ totalItems }) {
             <Menu className="w-6 h-6" />
           </button>
 
-          {/* LOGO: Centralizado */}
-          <Link to="/" onClick={() => setActiveTab('catalogo')} className="flex items-center">
-            <img 
-              src="/Logo.png" 
-              alt="Logo HUCRE" 
-              className="w-24 h-20 object-contain" 
-            />
-          </Link>
+        {/* ==========================================================================
+   LOGO GIRANDO EM 3D: Substitua o bloco antigo por este
+   ========================================================================== */}
+<Link 
+  to="/" 
+  onClick={() => setActiveTab('catalogo')} 
+  className="flex items-center justify-center cursor-pointer group"
+  /* 1. Ativa a perspectiva 3D no container pai */
+  style={{ perspective: '1000px' }} 
+>
+  {/* 2. Container interno que realmente sofre a animação (giro) */}
+  <div className="relative w-28 h-20 transition-transform duration-500 transform-style-3d animate-rotate-y-slow group">
+    
+    {/* 3. Lado da FRENTE do Logotipo */}
+    <div className="absolute inset-0 backface-hidden flex items-center justify-center">
+      <img 
+        src="/Logo.png" 
+        alt="HUCRE FRENTE" 
+        className="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(189,0,0,0.4)]" 
+      />
+    </div>
+
+    {/* 4. Lado do VERSO do Logotipo */}
+    {/* Ele começa espelhado (rotate-y-180) para dar o efeito de virar um objeto físico */}
+    <div className="absolute inset-0 rotate-y-180 backface-hidden flex items-center justify-center">
+      <img 
+        src="/Logo.png" 
+        alt="HUCRE VERSO" 
+        className="w-full h-full object-contain scale-x-[-1] filter drop-shadow-[0_0_15px_rgba(189,0,0,0.4)]" 
+      />
+    </div>
+
+    {/* Efeito de Brilho Vermelho na Lateral (Sutil) */}
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[3px] bg-red-650/40 rounded-full blur-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  </div>
+</Link>
           
           {/* ÍCONE DO CARRINHO: No canto direito */}
           <Link 
@@ -82,7 +110,7 @@ export function Header({ totalItems }) {
               {/* AS ABAS EM FORMATO VERTICAL */}
               <nav className="flex flex-col gap-2">
                 
-                {/* ABA: Catálogo */}
+                {/* ABA: Sobre Nós */}
                 <Link 
                   to="/" 
                   onClick={() => { setActiveTab('catalogo'); setIsMenuOpen(false); }}
@@ -97,32 +125,32 @@ export function Header({ totalItems }) {
                   Catalogo
                 </Link>
 
-                {/* ABA: Novidades */}
+                {/* ABA: Lookbook */}
                 <Link 
-                  to="/novidades" 
-                  onClick={() => { setActiveTab('novidades'); setIsMenuOpen(false); }}
+                  to="/lookbook" 
+                  onClick={() => { setActiveTab('lookbook'); setIsMenuOpen(false); }}
                   className={`
                     text-base tracking-widest uppercase py-3 px-4 flex items-center relative font-saint transition-all
-                    ${activeTab === 'novidades' 
+                    ${activeTab === 'lookbook' 
                       ? 'text-white font-bold bg-zinc-900 border-l-4 border-red-700' 
                       : 'text-gray-400 hover:text-red-700 hover:bg-zinc-900/50'}
                   `}
                 >
-                  Novidades
+                  Lookbook
                 </Link>
 
-                {/* ABA: Contacto */}
+                {/* ABA: Sobre Nós */}
                 <Link 
-                  to="/contacto" 
-                  onClick={() => { setActiveTab('contacto'); setIsMenuOpen(false); }}
+                  to="/sobre-nos" 
+                  onClick={() => { setActiveTab('sobre-nos'); setIsMenuOpen(false); }}
                   className={`
                     text-base tracking-widest uppercase py-3 px-4 flex items-center relative font-saint transition-all
-                    ${activeTab === 'contacto' 
+                    ${activeTab === 'sobre-nos' 
                       ? 'text-white font-bold bg-zinc-900 border-l-4 border-red-700' 
                       : 'text-gray-400 hover:text-red-700 hover:bg-zinc-900/50'}
                   `}
                 >
-                  Contato
+                  Sobre Nós
                 </Link>
 
               </nav>

@@ -15,10 +15,32 @@
 }
 
 @theme {
-  --font-saint: 'Saint', sans-serif;
+  --animate-rotate-y-slow: rotate-y-slow 6s linear infinite;
+
+  @keyframes rotate-y-slow {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(360deg);
+    }
+  }
+   --font-saint: 'Saint', sans-serif;
   --font-all-star: 'All-Star', sans-serif;
   --color-background: #f3f4f6;
   --color-foreground: #ff0000;
+}
+
+@utility backface-hidden {
+  backface-visibility: hidden;
+}
+
+@utility transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+@utility rotate-y-180 {
+  transform: rotateY(180deg);
 }
 
 body {
