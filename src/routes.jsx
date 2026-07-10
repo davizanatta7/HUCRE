@@ -7,15 +7,16 @@ import { Success } from './pages/Success'
 import { Lookbook } from './pages/Lookbook'
 import { SobreNos } from './pages/sobre-nos'
 
-
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <App />, // O App renderiza o Header e o Outlet
+    errorElement: <div style={{color: 'black', padding: '50px'}}><h1>Erro no App</h1></div>,
     children: [
       {
         path: "/",
         element: <Home />
+
       },
       {
         path: "/product/:id",

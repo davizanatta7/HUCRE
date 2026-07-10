@@ -1,34 +1,48 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link, useOutletContext } from 'react-router-dom'
+import { supabase } from '../supabaseClient'
+import { useAuth } from "@clerk/clerk-react"
 
 export function ProductDetails() {
   const { id } = useParams()
   const { addToCart: addToCartGlobal } = useOutletContext();
+  const { isSignedIn } = useAuth();
   
   const [showToast, setShowToast] = useState(false)
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
 
-   const  addToCart = (product) => {
+  const addToCart = (product) => {
     addToCartGlobal(product)
-    setShowToast(true)
-    setTimeout(() => setShowToast(false), 3000)
-  }
+    if (isSignedIn) {
+      setShowToast(true)
+      setTimeout(() => setShowToast(false), 3000)
+      }
+    }
 
   useEffect(() => {
     const fetchProduct = async () => {
-      try {
-        const response = await fetch(`https://fakestoreapi.com/products/${id}`)
-        const data = await response.json()
+      try {const { data, error } = await supabase
+          .from('products')
+          .select('*')
+          .eq('id', id) // Busca especificamente o produto com o ID da URL
+          .single()     // Diz pro Supabase que esperamos só 1 produto (não um array)
+
+        if (error) throw error
         setProduct(data)
       } catch (error) {
-        console.error(error)
+        console.error("MENSAGEM:", error.message)
+        console.error("DETALHES:", error.details)
+        console.error("DICA:", error.hint)
       } finally {
         setLoading(false)
       }
     }
 
-    fetchProduct()
+  // Só busca se existir um ID na URL
+    if (id) {
+      fetchProduct()
+    }
   }, [id])
 
   if (loading) {
@@ -50,7 +64,7 @@ export function ProductDetails() {
   const formattedPrice = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL'
-  }).format(product.price * 5)
+  }).format(product.price)
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
@@ -63,8 +77,8 @@ export function ProductDetails() {
       <div className="flex flex-col md:flex-row">
         <div className="w-full md:w-1/2 p-8 lg:p-12 bg-white flex items-center justify-center">
           <img 
-            src={product.image} 
-            alt={product.title} 
+            src={product.image_url} 
+            alt={product.name} 
             className="max-w-full max-h-96 object-contain mix-blend-multiply"
           />
         </div>
@@ -75,7 +89,7 @@ export function ProductDetails() {
           </span>
           
           <h1 className="text-3xl lg:text-4xl font-extrabold text-gray-900 mb-4 leading-tight mx-32">
-            {product.title}
+            {product.name}
           </h1>
           
           <div className="flex items-center mb-6">

@@ -1,24 +1,40 @@
 import { Outlet } from "react-router-dom";
 import { Header } from "./components/Header";
-
 import { useState } from "react";
+// 1. Adicionamos as ferramentas do Clerk aqui no topo
+import { useAuth, useClerk } from "@clerk/clerk-react";
 
 export function App() {
   const [cart, setCart] = useState([]);
+  
+  // 2. Chamamos o Clerk para dentro do App
+  const { isSignedIn } = useAuth();
+  const clerk = useClerk();
 
   const addToCart = (product) => {
+    if (!isSignedIn) {
+      clerk.openSignIn();
+      return; 
+    }
+
     setCart((prevCart) => {
-      const itemExists = prevCart.find((item) => item.id === product.id);
+      const newItem = {
+        ...product,
+        image: product.image || product.image_url, 
+        title: product.title || product.name // Também padronizamos o nome
+      };
+
+      const itemExists = prevCart.find((item) => item.id === newItem.id);
 
       if (itemExists) {
         return prevCart.map((item) =>
-          item.id === product.id
+          item.id === newItem.id
             ? { ...item, quantity: item.quantity + 1 }
             : item,
         );
       }
 
-      return [...prevCart, { ...product, quantity: 1 }];
+      return [...prevCart, { ...newItem, quantity: 1 }];
     });
   };
 

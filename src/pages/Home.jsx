@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { ProductCard } from '../components/ProductCard'
+import { supabase } from '../supabaseClient'
 
 export function Home() {
   const [products, setProducts] = useState([])
@@ -7,16 +8,25 @@ export function Home() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      try {
-        const response = await fetch('https://fakestoreapi.com/products')
-        const data = await response.json()
-        setProducts(data)
-      } catch (error) {
-        console.error("Erro ao buscar produtos:", error)
-      } finally {
-        setLoading(false)
-      }
-    }
+  try {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('is_active', true)
+
+    if (error) throw error
+    
+    console.log("DADOS VINDOS DO SUPABASE:", data)
+
+    setProducts(data)
+ } catch (error) {
+  console.error("MENSAGEM:", error.message)
+  console.error("DETALHES:", error.details)
+  console.error("DICA:", error.hint)
+}finally {
+    setLoading(false)
+  }
+}
 
     fetchProducts()
   }, [])
