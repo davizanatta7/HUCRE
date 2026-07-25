@@ -7,7 +7,14 @@
   font-style: normal;
 }
 
-  @font-face {
+@font-face {
+  font-family: 'Dubell';
+  src: url('./dubellit.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'All-Star';
   src: url('./All-Star.otf') format('opentype');
   font-weight: normal;
@@ -15,6 +22,13 @@
 }
 
 @theme {
+  --font-dubell: 'Dubell', sans-serif;
+  --font-saint: 'Saint', sans-serif;
+  --font-all-star: 'All-Star', sans-serif;
+
+  --color-background: #f3f4f6;
+  --color-foreground: #ff0000;
+
   --animate-rotate-y-slow: rotate-y-slow 6s linear infinite;
 
   @keyframes rotate-y-slow {
@@ -25,10 +39,6 @@
       transform: rotateY(360deg);
     }
   }
-   --font-saint: 'Saint', sans-serif;
-  --font-all-star: 'All-Star', sans-serif;
-  --color-background: #f3f4f6;
-  --color-foreground: #ff0000;
 }
 
 @utility backface-hidden {
@@ -46,4 +56,6 @@
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);
+  /* Se quiser que a fonte padrão do site inteiro seja a Dubell, descomente abaixo: */
+  font-family: var(--font-dubell); 
 }

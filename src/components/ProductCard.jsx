@@ -20,10 +20,10 @@ export function ProductCard({ product }) {
       </div>
       
       <div className="flex flex-col flex-1">
-        <span className="text-xs font-semibold text-black uppercase tracking-wider mb-1">
+        <span className="text-xs text-black uppercase tracking-wider mb-1">
           {product.category}
         </span>
-        <h2 className="text-sm font-medium text-gray-900 line-clamp-2 mb-2 flex-1">
+        <h2 className="text-sm text-gray-900 line-clamp-2 mb-2 flex-1">
           {product.name}
         </h2>
         
@@ -33,7 +33,7 @@ export function ProductCard({ product }) {
           </span>
           <div className="flex items-center text-sm text-amber-500">
             <span>★</span>
-            <span className="ml-2 text-gray-600 font-medium text-base">
+            <span className="ml-2 text-gray-600 text-base">
                 {product.rating_rate ? Number(product.rating_rate).toFixed(1) : '0.0'}
             </span>
           </div>

@@ -34,7 +34,7 @@ export function Home() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="text-lg font-all-star text-gray-100 animate-pulse">Carregando catálogo de produtos...</div>
+        <div className="text-lg text-gray-100 animate-pulse">Carregando catálogo de produtos...</div>
       </div>
     )
   }
@@ -42,8 +42,8 @@ export function Home() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-all-star text-red-700">Novidades</h1>
-        <p className="font-all-star text-gray-100 mt-2">Streetwear Original. Contra Artificial.</p>
+        <h1 className="text-3xl font-dubell text-red-700">Novidades</h1>
+        <p className=" text-gray-100 mt-2">Streetwear Original. Contra Artificial.</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

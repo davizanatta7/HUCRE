@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import { useState } from "react";
 // 1. Adicionamos as ferramentas do Clerk aqui no topo
 import { useAuth, useClerk } from "@clerk/clerk-react";
@@ -55,9 +56,7 @@ export function App() {
       </main>
 
       <footer className="bg-black border-t border-red-700 mt-auto">
-        <div className="max-w-7xl mx-auto px-4 py-6 text-center text-white text-sm">
-          © 2026 HUCRE STUDIO. Todos os direitos reservados.
-        </div>
+        <Footer />
       </footer>
     </div>
   );

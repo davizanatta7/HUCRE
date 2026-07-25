@@ -4,7 +4,6 @@ import { Home } from './pages/Home'
 import { ProductDetails } from './pages/ProductDetails'
 import { Checkout } from './pages/Checkout'
 import { Success } from './pages/Success'
-import { Lookbook } from './pages/Lookbook'
 import { SobreNos } from './pages/sobre-nos'
 
 export const router = createBrowserRouter([
@@ -29,10 +28,6 @@ export const router = createBrowserRouter([
       {
         path: "/success",
         element: <Success />
-      },
-      {
-        path: '/lookbook', 
-        element: <Lookbook />
       },
       {
         path: '/sobre-nos',     

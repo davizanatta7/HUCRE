@@ -16,7 +16,7 @@ export function Header({ totalItems }) {
           {/* LADO ESQUERDO: Botão do Menu Hambúrguer */}
           <button 
             onClick={() => setIsMenuOpen(true)}
-            className="text-gray-100 hover:text-red-700 transition-colors cursor-pointer p-2"
+            className="text-red-700 hover:text-gray-100 transition-colors cursor-pointer p-2"
             aria-label="Abrir menu"
           >
             <Menu className="w-6 h-6" />
@@ -55,7 +55,7 @@ export function Header({ totalItems }) {
             <SignedOut>
               {/* Botão de Entrar (Para usuários não logados) */}
               <SignInButton mode="modal">
-                <button className="text-sm font-saint text-gray-100 hover:text-red-700 transition-colors uppercase tracking-widest cursor-pointer hidden sm:block">
+                <button className="text-sm text-red-700 hover:text-gray-100 transition-colors uppercase tracking-widest cursor-pointer hidden sm:block">
                   Login
                 </button>
               </SignInButton>
@@ -82,13 +82,13 @@ export function Header({ totalItems }) {
               onClick={() => setActiveTab('checkout')}
               className={`
                 relative p-2 transition-colors flex items-center justify-center
-                ${activeTab === 'checkout' ? 'text-red-700' : 'text-gray-100 hover:text-red-700'}
+                ${activeTab === 'checkout' ? 'text-gray-100' : 'text-red-700 hover:text-gray-100'}
               `}
               aria-label="Carrinho de compras"
             >
               <ShoppingCart className="w-6 h-6" />
               {totalItems > 0 && (
-                <span className="absolute top-0 right-0 bg-red-700 text-white text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full shadow-sm">
+                <span className="absolute top-0 right-0 bg-gray-100 text-red-700 text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full shadow-sm">
                   {totalItems}
                 </span>
               )}
@@ -110,7 +110,7 @@ export function Header({ totalItems }) {
           >
             <div>
               <div className="flex items-center justify-between border-b border-zinc-900 pb-4 mb-6">
-                <span className="font-saint text-2xl text-red-600 tracking-wider">HUCRE</span>
+                <span className="text-2xl text-red-600 tracking-wider">HUCRE</span>
                 <button 
                   onClick={() => setIsMenuOpen(false)}
                   className="text-gray-400 hover:text-white cursor-pointer"
@@ -124,21 +124,8 @@ export function Header({ totalItems }) {
                   to="/" 
                   onClick={() => { setActiveTab('catalogo'); setIsMenuOpen(false); }}
                   className={`
-                    text-base tracking-widest uppercase py-3 px-4 flex items-center relative font-saint transition-all
+                    text-base tracking-widest uppercase py-3 px-4 flex items-center relative transition-all
                     ${activeTab === 'catalogo' 
-                      ? 'text-white font-bold bg-zinc-900 border-l-4 border-red-700' 
-                      : 'text-gray-400 hover:text-red-700 hover:bg-zinc-900/50'}
-                  `}
-                >
-                  Catalogo
-                </Link>
-
-                <Link 
-                  to="/lookbook" 
-                  onClick={() => { setActiveTab('lookbook'); setIsMenuOpen(false); }}
-                  className={`
-                    text-base tracking-widest uppercase py-3 px-4 flex items-center relative font-saint transition-all
-                    ${activeTab === 'lookbook' 
                       ? 'text-white font-bold bg-zinc-900 border-l-4 border-red-700' 
                       : 'text-gray-400 hover:text-red-700 hover:bg-zinc-900/50'}
                   `}
@@ -150,7 +137,7 @@ export function Header({ totalItems }) {
                   to="/sobre-nos" 
                   onClick={() => { setActiveTab('sobre-nos'); setIsMenuOpen(false); }}
                   className={`
-                    text-base tracking-widest uppercase py-3 px-4 flex items-center relative font-saint transition-all
+                    text-base tracking-widest uppercase py-3 px-4 flex items-center relative transition-all
                     ${activeTab === 'sobre-nos' 
                       ? 'text-white font-bold bg-zinc-900 border-l-4 border-red-700' 
                       : 'text-gray-400 hover:text-red-700 hover:bg-zinc-900/50'}
@@ -162,7 +149,7 @@ export function Header({ totalItems }) {
                 {/* 4. Opção extra: Adicionar botão de login no menu mobile também */}
                 <SignedOut>
                   <SignInButton mode="modal">
-                    <button className="text-left text-base tracking-widest uppercase py-3 px-4 flex items-center relative font-saint text-gray-400 hover:text-red-700 hover:bg-zinc-900/50 transition-all mt-4 border-t border-zinc-900 w-full cursor-pointer">
+                    <button className="text-left text-base tracking-widest uppercase py-3 px-4 flex items-center relative text-gray-400 hover:text-red-700 hover:bg-zinc-900/50 transition-all mt-4 border-t border-zinc-900 w-full cursor-pointer">
                       Login / Registar
                     </button>
                   </SignInButton>
