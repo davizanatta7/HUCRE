@@ -2,21 +2,21 @@
 
 @font-face {
   font-family: 'Saint';
-  src: url('./Saint-4ZJ4.ttf') format('truetype');
+  src: url('/Saint-4ZJ4.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Dubell';
-  src: url('./dubellit.ttf') format('truetype');
+  src: url('/dubellit.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'All-Star';
-  src: url('./All-Star.otf') format('opentype');
+  src: url('/All-Star.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
