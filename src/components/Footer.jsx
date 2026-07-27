@@ -16,7 +16,7 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-4 text-white mt-2">
             <a 
-              href="https://instagram.com" 
+              href="https://www.instagram.com/hu_cre/" 
               target="_blank" 
               rel="noreferrer"
               className="p-2 bg-zinc-900 rounded-full hover:bg-red-700 hover:text-white transition-colors"
@@ -31,7 +31,7 @@ export function Footer() {
               </svg>
             </a>
             <a 
-              href="mailto:contato@hucre.com" 
+              href="mailto:hucre.co@gmail.com" 
               className="p-2 bg-zinc-900 rounded-full hover:bg-red-700 hover:text-white transition-colors"
               aria-label="Email"
             >
@@ -92,7 +92,7 @@ export function Footer() {
             </li>
             <li className="flex items-center gap-2">
               <Mail className="w-4 h-4 text-red-700 shrink-0" />
-              <span>suporte@hucre.com.br</span>
+              <span>hucre.co@gmail.com</span>
             </li>
           </ul>
         </div>
@@ -118,7 +118,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-zinc-600 text-center md:text-left border-t border-zinc-900/60 pt-6">
           <div>
             <p className="font-semibold text-zinc-500">HUCRE STREETWEAR LTDA</p>
-            <p>CNPJ: 00.000.000/0001-00 • Todos os direitos reservados. © 2026</p>
+            <p>CNPJ: 67.022.313/0001-11 • Todos os direitos reservados. © 2026</p>
           </div>
           <p className="text-zinc-600">
             Desenvolvido com foco em alta performance.
