@@ -43,19 +43,23 @@ export default async function handler(req, res) {
 
   // AQUI ESTÁ O SEGREDO: O evento correto é o checkout.session.completed
   if (event.type === 'checkout.session.completed') {
-    const session = event.data.object;
-    const pedidoId = session.metadata?.pedidoId;
+  const session = event.data.object;
+  const pedidoId = session.metadata?.pedidoId;
 
-    if (pedidoId) {
+  if (pedidoId) {
     const shipping = session.shipping_details;
-    const enderecoFormatado = shipping ? 
+    const enderecoFormatado = shipping && shipping.address ? 
       `${shipping.address.line1}, ${shipping.address.city} - ${shipping.address.state}, ${shipping.address.postal_code}` 
       : 'Endereço não informado';
-      // 1. Atualiza o status do pedido para 'pago'
-      await supabase
-        .from('orders')
-        .update({ status: 'pago' })
-        .eq('id', pedidoId);
+
+    // Atualiza o pedido no Supabase para 'pago'
+    await supabase
+      .from('orders')
+      .update({ 
+        status: 'pago',
+        shipping_address: 'Aguardando endereço da Stripe', // Pode ser atualizado com o endereço real se necessário
+      })
+      .eq('id', pedidoId);
 
       // 2. Busca os itens e dá baixa no estoque (tabela produtos / stock_quantity)
       const { data: itensPedido } = await supabase

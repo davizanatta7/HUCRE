@@ -40,6 +40,7 @@ export function Checkout() {
             user_id: user.id,
             total_amount: totalValue, 
             status: "pendente",
+            shipping_address: "Aguardando endereço da Stripe"
         }])
         .select()
         .single();
