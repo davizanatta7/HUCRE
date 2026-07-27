@@ -5,6 +5,9 @@ import { ProductDetails } from './pages/ProductDetails'
 import { Checkout } from './pages/Checkout'
 import { Success } from './pages/Success'
 import { SobreNos } from './pages/sobre-nos'
+import { AdminRoute } from './components/AdminRoute';
+import { Admin } from './pages/Admin';
+
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +19,14 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home />
 
+      },
+      { 
+        path: "/admin", 
+        element: (
+          <AdminRoute>
+            <Admin />
+          </AdminRoute>
+        ) 
       },
       {
         path: "/product/:id",

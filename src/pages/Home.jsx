@@ -10,7 +10,7 @@ export function Home() {
     const fetchProducts = async () => {
   try {
     const { data, error } = await supabase
-      .from('products')
+      .from('produtos')
       .select('*')
       .eq('is_active', true)
 

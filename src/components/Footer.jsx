@@ -82,13 +82,9 @@ export function Footer() {
             Atendimento
           </h3>
           <ul className="flex flex-col gap-3 text-xs">
-            <li className="flex items-start gap-2">
-              <MapPin className="w-4 h-4 text-red-700 shrink-0 mt-0.5" />
-              <span>Rua Exemplo Urbana, 123 - Bairro Alto, São Paulo - SP</span>
-            </li>
             <li className="flex items-center gap-2">
               <Phone className="w-4 h-4 text-red-700 shrink-0" />
-              <span>(11) 99999-9999</span>
+              <span>(11) 95606-9084</span>
             </li>
             <li className="flex items-center gap-2">
               <Mail className="w-4 h-4 text-red-700 shrink-0" />

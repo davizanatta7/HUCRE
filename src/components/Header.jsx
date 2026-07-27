@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom'
 import { ShoppingCart, Menu, X } from 'lucide-react'
 import { useState } from 'react'
-// 1. Mantemos a importação dos botões do Clerk
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react'
+import { SignedIn, SignedOut, useUser, SignInButton, UserButton } from '@clerk/clerk-react'
 
 export function Header({ totalItems }) {
   const [activeTab, setActiveTab] = useState('catalogo');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useUser();
+  const isAdmin = user?.publicMetadata?.role === 'admin';
    
   return (
       <>
@@ -98,72 +99,88 @@ export function Header({ totalItems }) {
         </div>
       </header>
 
-      {/* MENU LATERAL RETRÁTIL (SIDEBAR) - Mantido idêntico */}
-      {isMenuOpen && (
-        <div 
-          className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 transition-opacity"
-          onClick={() => setIsMenuOpen(false)}
-        >
+      {/* MENU LATERAL RETRÁTIL (SIDEBAR) */}
+        {isMenuOpen && (
           <div 
-            className="w-72 max-w-[80vw] h-full bg-black border-r border-zinc-900 p-6 flex flex-col justify-between"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 transition-opacity"
+            onClick={() => setIsMenuOpen(false)}
           >
-            <div>
-              <div className="flex items-center justify-between border-b border-zinc-900 pb-4 mb-6">
-                <span className="text-2xl text-red-600 tracking-wider">HUCRE</span>
-                <button 
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-gray-400 hover:text-white cursor-pointer"
-                >
-                  <X className="w-6 h-6" />
-                </button>
+            <div 
+              className="w-72 max-w-[80vw] h-full bg-black border-r border-zinc-900 p-6 flex flex-col justify-between"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div>
+                <div className="flex items-center justify-between border-b border-zinc-900 pb-4 mb-6">
+                  <span className="text-2xl text-red-600 tracking-wider">HUCRE</span>
+                  <button 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-gray-400 hover:text-white cursor-pointer"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+
+                <nav className="flex flex-col gap-2">
+                  <Link 
+                    to="/" 
+                    onClick={() => { setActiveTab('catalogo'); setIsMenuOpen(false); }}
+                    className={`
+                      text-base tracking-widest uppercase py-3 px-4 flex items-center relative transition-all
+                      ${activeTab === 'catalogo' 
+                        ? 'text-white font-bold bg-zinc-900 border-l-4 border-red-700' 
+                        : 'text-gray-400 hover:text-red-700 hover:bg-zinc-900/50'}
+                    `}
+                  >
+                    Lookbook
+                  </Link>
+
+                  <Link 
+                    to="/sobre-nos" 
+                    onClick={() => { setActiveTab('sobre-nos'); setIsMenuOpen(false); }}
+                    className={`
+                      text-base tracking-widest uppercase py-3 px-4 flex items-center relative transition-all
+                      ${activeTab === 'sobre-nos' 
+                        ? 'text-white font-bold bg-zinc-900 border-l-4 border-red-700' 
+                        : 'text-gray-400 hover:text-red-700 hover:bg-zinc-900/50'}
+                    `}
+                  >
+                    Sobre Nós
+                  </Link>
+
+                  {/* ABA ADMIN EXCLUSIVA - Aparece apenas se isAdmin for true */}
+                  {isAdmin && (
+                    <Link 
+                      to="/admin" 
+                      onClick={() => { setActiveTab('admin'); setIsMenuOpen(false); }}
+                      className={`
+                        text-base tracking-widest uppercase py-3 px-4 flex items-center relative transition-all text-red-500 font-semibold border border-red-900/40 bg-red-950/20 hover:bg-red-900/30 hover:text-red-400 mt-2
+                        ${activeTab === 'admin' 
+                          ? 'bg-red-900/40 border-l-4 border-red-600 text-white font-bold' 
+                          : ''}
+                      `}
+                    >
+                      Painel de Administração
+                    </Link>
+                  )}
+
+                  {/* Opção extra: Adicionar botão de login no menu mobile também */}
+                  <SignedOut>
+                    <SignInButton mode="modal">
+                      <button className="text-left text-base tracking-widest uppercase py-3 px-4 flex items-center relative text-gray-400 hover:text-red-700 hover:bg-zinc-900/50 transition-all mt-4 border-t border-zinc-900 w-full cursor-pointer">
+                        Login / Registrar
+                      </button>
+                    </SignInButton>
+                  </SignedOut>
+
+                </nav>
               </div>
 
-              <nav className="flex flex-col gap-2">
-                <Link 
-                  to="/" 
-                  onClick={() => { setActiveTab('catalogo'); setIsMenuOpen(false); }}
-                  className={`
-                    text-base tracking-widest uppercase py-3 px-4 flex items-center relative transition-all
-                    ${activeTab === 'catalogo' 
-                      ? 'text-white font-bold bg-zinc-900 border-l-4 border-red-700' 
-                      : 'text-gray-400 hover:text-red-700 hover:bg-zinc-900/50'}
-                  `}
-                >
-                  Lookbook
-                </Link>
-
-                <Link 
-                  to="/sobre-nos" 
-                  onClick={() => { setActiveTab('sobre-nos'); setIsMenuOpen(false); }}
-                  className={`
-                    text-base tracking-widest uppercase py-3 px-4 flex items-center relative transition-all
-                    ${activeTab === 'sobre-nos' 
-                      ? 'text-white font-bold bg-zinc-900 border-l-4 border-red-700' 
-                      : 'text-gray-400 hover:text-red-700 hover:bg-zinc-900/50'}
-                  `}
-                >
-                  Sobre Nós
-                </Link>
-                
-                {/* 4. Opção extra: Adicionar botão de login no menu mobile também */}
-                <SignedOut>
-                  <SignInButton mode="modal">
-                    <button className="text-left text-base tracking-widest uppercase py-3 px-4 flex items-center relative text-gray-400 hover:text-red-700 hover:bg-zinc-900/50 transition-all mt-4 border-t border-zinc-900 w-full cursor-pointer">
-                      Login / Registar
-                    </button>
-                  </SignInButton>
-                </SignedOut>
-
-              </nav>
-            </div>
-
-            <div className="text-[10px] font-mono text-zinc-600 tracking-tighter uppercase">
-              © 2026 HUCRE STUDIO.
+              <div className="text-[10px] font-mono text-zinc-600 tracking-tighter uppercase">
+                © 2026 HUCRE STUDIO.
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
       </>
   )
 }
