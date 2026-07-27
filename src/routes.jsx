@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
         ) 
       },
       {
-      path: "pedidos",
+      path: "/pedidos",
       element: <Pedidos />
       },
       {
