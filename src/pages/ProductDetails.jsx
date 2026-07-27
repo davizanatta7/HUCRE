@@ -23,7 +23,7 @@ export function ProductDetails() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {const { data, error } = await supabase
-          .from('products')
+          .from('produtos')
           .select('*')
           .eq('id', id) // Busca especificamente o produto com o ID da URL
           .single()     // Diz pro Supabase que esperamos só 1 produto (não um array)

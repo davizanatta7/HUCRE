@@ -33,6 +33,7 @@ export function Checkout() {
 
       const supabaseAuth = getSupabaseClientWithAuth(token);
 
+      // 1. Salva o pedido no Supabase com status pendente
       const { data: pedidoCriado, error: pedidoError } = await supabaseAuth
         .from("pedidos")
         .insert([{
@@ -45,6 +46,7 @@ export function Checkout() {
 
       if (pedidoError) throw pedidoError;
 
+      // 2. Salva os itens do pedido
       const itensParaInserir = cart.map((item) => ({
         pedido_id: pedidoCriado.id,
         product_id: item.id,
@@ -58,12 +60,16 @@ export function Checkout() {
 
       if (itensError) throw itensError;
 
+      // 3. Envia o carrinho E o ID do pedido para a API do Stripe Checkout
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ cart }),
+        body: JSON.stringify({ 
+          cart, 
+          pedidoId: pedidoCriado.id // Enviado para o backend configurar o metadata da Stripe
+        }),
       });
 
       const responseText = await response.text();
@@ -130,7 +136,7 @@ export function Checkout() {
               </div>
             </div>
             
-            {/* Botões de Aumentar e Diminuir Quantidade */}
+            {/* Controles de Quantidade (+ e -) */}
             <div className="flex items-center gap-3 bg-zinc-900 px-3 py-1.5 rounded-lg border border-zinc-800">
               <button 
                 onClick={() => decreaseQuantity(item.id)}

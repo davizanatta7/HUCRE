@@ -27,7 +27,7 @@ export function Success() {
         </svg>
       </div>
 
-      <h1 className="text-4xl font-['Saint'] text-gray-100 mb-4 text-center">
+      <h1 className="text-4xl text-gray-100 mb-4 text-center">
         Pedido Confirmado
       </h1>
 
@@ -37,7 +37,7 @@ export function Success() {
 
       <Link
         to="/"
-        className="bg-red-900 text-white px-8 py-4 rounded-xl font-saint
+        className="bg-red-900 text-white px-8 py-4 rounded-xl
         text-lg hover:bg-red-700 transition-colors shadow-lg shadow-red-200"
       >Continuar Comprando</Link>
     </div>

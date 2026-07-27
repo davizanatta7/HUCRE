@@ -12,12 +12,14 @@
   "dependencies": {
     "@clerk/clerk-react": "^5.61.8",
     "@clerk/localizations": "^4.13.1",
+    "@stripe/stripe-js": "^9.12.0",
     "@supabase/supabase-js": "^2.110.2",
     "@tailwindcss/vite": "^4.3.0",
     "lucide-react": "^1.16.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.15.1",
+    "stripe": "^22.3.2",
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
