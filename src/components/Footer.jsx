@@ -47,10 +47,14 @@ export function Footer() {
           </h3>
           <ul className="flex flex-col gap-2 text-xs">
             <li>
-              <Link to="/lookbook" className="hover:text-red-600 transition-colors">Lookbook</Link>
+              <Link to="/"
+               onClick={() => { setActiveTab(''); setIsMenuOpen(false); }}
+               className="hover:text-red-600 transition-colors">Lookbook</Link>
             </li>
             <li>
-              <Link to="/contato" className="hover:text-red-600 transition-colors">Fale Conosco</Link>
+              <Link to="/contato" 
+               onClick={() => { setActiveTab('contato'); setIsMenuOpen(false); }}
+               className="hover:text-red-600 transition-colors">Fale Conosco</Link>
             </li>
           </ul>
         </div>

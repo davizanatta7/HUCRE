@@ -3,7 +3,6 @@ import { Menu, ShoppingBag, X, User } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 
 export function Header(props) {
-  // Desestruturação segura com valores padrão para NUNCA dar ReferenceError
   const {
     activeTab = 'catalogo',
     setActiveTab = () => {},
@@ -16,56 +15,29 @@ export function Header(props) {
     isAdmin = false
   } = props;
 
-  // Lógica inteligente para calcular o total sem quebrar o código
   const lista = carrinho.length > 0 ? carrinho : cart;
   const contadorTotal = totalItems !== undefined 
     ? totalItems 
     : lista.reduce((acc, item) => acc + (item.quantity || item.quantidade || 1), 0);
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-black/90 backdrop-blur-md border-b border-zinc-900 font-dubell">
+    <header className="sticky top-0 z-40 w-full bg-black border-b border-zinc-900 font-dubell">
       
       {/* GRID DE 3 COLUNAS */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 sm:h-24 grid grid-cols-3 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 sm:h-24 grid grid-cols-3 items-center bg-black">
 
-        {/* LADO ESQUERDO: Botão do Menu Mobile + Links do Desktop */}
-        <div className="flex items-center justify-start gap-4">
+        {/* 1. LADO ESQUERDO: Botão do Menu Hambúrguer */}
+        <div className="flex items-center justify-start">
           <button 
             onClick={() => setIsMenuOpen(true)}
-            className="md:hidden text-gray-400 hover:text-white cursor-pointer p-1"
+            className="text-gray-400 hover:text-white cursor-pointer p-1 transition-colors"
             type="button"
           >
             <Menu className="w-6 h-6" />
           </button>
-
-          <nav className="hidden md:flex items-center gap-6">
-            <Link 
-              to="/" 
-              onClick={() => setActiveTab('catalogo')}
-              className={` text-sm tracking-widest uppercase transition-colors ${activeTab === 'catalogo' ? 'text-white font-dubell border-b-2 border-red-700 pb-1' : 'text-gray-400 hover:text-white'}`}
-            >
-              Lookbook
-            </Link>
-            <Link 
-              to="/sobre-nos" 
-              onClick={() => setActiveTab('sobre-nos')}
-              className={` text-sm tracking-widest uppercase transition-colors ${activeTab === 'sobre-nos' ? 'text-white font-dubell border-b-2 border-red-700 pb-1' : 'text-gray-400 hover:text-white'}`}
-            >
-              Sobre Nós
-            </Link>
-            {isAdmin && (
-              <Link 
-                to="/admin"
-                onClick={() => setActiveTab('admin')}
-                className={` text-sm tracking-widest uppercase transition-colors ${activeTab === 'admin' ? 'text-white font-dubell border-b-2 border-red-700 pb-1' : 'text-gray-400 hover:text-white'}`}
-              >
-                Admin
-              </Link>
-            )}
-          </nav>
         </div>
 
-        {/* CENTRO PERFEITO: Logo MP4 em Vídeo */}
+        {/* 2. CENTRO PERFEITO: Logo MP4 em Vídeo */}
         <div className="flex items-center justify-center">
           <Link 
             to="/" 
@@ -86,8 +58,8 @@ export function Header(props) {
           </Link>
         </div>
 
-       {/* 3. LADO DIREITO: Ícone do Usuário e Carrinho */}
-        <div className="flex items-center justify-end gap-4">
+        {/* 3. LADO DIREITO: Ícone do Usuário e Carrinho */}
+        <div className="flex items-center justify-end gap-4 bg-black">
           <SignedOut>
             <SignInButton mode="modal">
               <button className="text-gray-400 hover:text-white transition-colors cursor-pointer p-1" type="button">
@@ -145,14 +117,14 @@ export function Header(props) {
 
       </div>
 
+      {/* SIDEBAR / MENU LATERAL DESLIZANTE */}
       {isMenuOpen && (
         <div 
-          className="fixed inset-0 z-[100] bg-black backdrop-blur-md transition-all duration-300"
+          className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md transition-all duration-300"
           onClick={() => setIsMenuOpen(false)}
         >
-          {/* PAINEL DO MENU COM FUNDO SÓLIDO */}
           <div 
-            className="fixed top-0 left-0 w-72 max-w-[85vw] h-screen bg-black border-r border-black p-6 flex flex-col justify-between shadow-[20px_0_50px_rgba(0,0,0,0.9)] z-[101] overflow-y-auto"
+            className="fixed top-0 left-0 w-72 max-w-[85vw] h-screen bg-black border-r border-zinc-900 p-6 flex flex-col justify-between shadow-[20px_0_50px_rgba(0,0,0,0.9)] z-[101] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div>
@@ -196,7 +168,14 @@ export function Header(props) {
                   Sobre Nós
                 </Link>
 
-                {/* ABA ADMIN EXCLUSIVA */}
+                <Link 
+                  to="/pedidos" 
+                  onClick={() => { setActiveTab('pedidos'); setIsMenuOpen(false); }}
+                  className="text-base tracking-widest uppercase py-3 px-4 flex items-center transition-all text-zinc-400 hover:text-red-600 hover:bg-zinc-900/50"
+                >
+                  Meus Pedidos
+                </Link>
+
                 {isAdmin && (
                   <Link 
                     to="/admin" 

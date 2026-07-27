@@ -35,10 +35,10 @@ export function Checkout() {
 
       // 1. Salva o pedido no Supabase com status pendente
       const { data: pedidoCriado, error: pedidoError } = await supabaseAuth
-        .from("pedidos")
+        .from("orders")
         .insert([{
             user_id: user.id,
-            total: totalValue, 
+            total_amount: totalValue, 
             status: "pendente",
         }])
         .select()
@@ -48,14 +48,14 @@ export function Checkout() {
 
       // 2. Salva os itens do pedido
       const itensParaInserir = cart.map((item) => ({
-        pedido_id: pedidoCriado.id,
+        order_id: pedidoCriado.id,
         product_id: item.id,
-        quantidade: item.quantity,
-        preco_unitario: item.price, 
+        quantity: item.quantity,
+        price_at_purchase: item.price, 
       }));
 
       const { error: itensError } = await supabaseAuth
-        .from("itens_pedido")
+        .from("order_items")
         .insert(itensParaInserir);
 
       if (itensError) throw itensError;
